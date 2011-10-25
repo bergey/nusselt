@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en">
+<head>
+  <title>Graph Test</title>
+  <meta content='text/html' charset='UTF-8' http-equiv='Content-Type'/>
+  <link type="text/css" rel="stylesheet" href="graph.css" />
+  <script type="text/javascript" src="d3-2.4.6.js" > </script>
+</head>
+<body>
+  <p>This is  not a graph.</p>
+  <script type="text/javascript">
+var data = [4, 8, 15, 16, 23, 42];
+
+var chart = d3.select("body")
+	.append("div")
+	.attr("class", "chart")
+	.selectAll("div")
+	.data(data)
+	.enter().append("div")
+	.style("width", function(d) { return d * 10 + "px"; })
+	.text(function(d) { return d; });
+
+var x = d3.scale.linear()
+	.domain([0, d3.max(data)])
+	.range(["0px", "420px"]);
+  </script>
+</body>
+</html>
