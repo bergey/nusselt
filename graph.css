@@ -6,6 +6,8 @@ font: 10px sans-serif;
   margin-left: 42px;
   font: 10px sans-serif;
   shape-rendering: crispEdges;
+  padding: 3px;
+  margin: 20px;
 }
 
 .chart div {

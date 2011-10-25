@@ -11,18 +11,34 @@
   <script type="text/javascript">
 var data = [4, 8, 15, 16, 23, 42];
 
+var x = d3.scale.linear()
+	.domain([0, d3.max(data)])
+	.range(["0px", "420px"]);
+
 var chart = d3.select("body")
 	.append("div")
 	.attr("class", "chart")
 	.selectAll("div")
 	.data(data)
 	.enter().append("div")
-	.style("width", function(d) { return d * 10 + "px"; })
-	.text(function(d) { return d; });
+	.style("width", x)
+	.text(String);
 
-var x = d3.scale.linear()
-	.domain([0, d3.max(data)])
-	.range(["0px", "420px"]);
+var graph = d3.select("body")
+	.append("svg:svg")
+	.attr("class", "chart")
+	.attr("width", 420)
+	.attr("height", 20 * data.length);
+
+var barHeight = 20
+
+graph.selectAll("rect")
+	.data(data)
+	.enter().append("svg:rect")
+	.attr("y", function(d, i) { return i * barHeight; })
+	.attr("width", x)
+	.attr("height", barHeight);
+
   </script>
 </body>
 </html>
