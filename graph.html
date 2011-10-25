@@ -39,6 +39,15 @@ graph.selectAll("rect")
 	.attr("width", x)
 	.attr("height", barHeight);
 
+graph.selectAll("text")
+	.data(data)
+	.enter().append("svg:text")
+	.attr("y", function(d, i) {return (i) * barHeight + 12.5; })
+	.attr("x", x)
+	.attr("dx", "-20")
+//	.attr("text-anchor", "end")
+	.text(String);
+
   </script>
 </body>
 </html>
