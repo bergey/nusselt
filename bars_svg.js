@@ -1,10 +1,13 @@
-var data = [4, 8, 15, 16, 23, 42];
+﻿var data = [23, 56, 14, 19, 3, 35];
+
 
 var x = d3.scale.linear()
 	.domain([0, d3.max(data)])
-	.range(["0px", "420px"]);
+	.range([0, 420]);
 
-var barHeight = 20
+var y = d3.scale.ordinal()
+	.domain(data)
+	.rangeBands([0, 120]);
 
 var graph = d3.select("body")
 	.append("svg:svg")
@@ -17,17 +20,18 @@ var graph = d3.select("body")
 graph.selectAll("rect")
 	.data(data)
 	.enter().append("svg:rect")
-	.attr("y", function(d, i) { return i * barHeight; })
+	.attr("y", y)
 	.attr("width", x)
-	.attr("height", barHeight);
+	.attr("height", y.rangeBand());
 
 graph.selectAll("text")
 	.data(data)
 	.enter().append("svg:text")
-	.attr("y", function(d, i) {return (i) * barHeight + 12.5; })
 	.attr("x", x)
-//	.attr("dx", "-20")
-//	.attr("text-anchor", "end")
+	.attr("y", function(d) {return y(d) + y.rangeBand()/2;})
+	.attr("dx", 3)
+	.attr("dy", ".35em")
+	.attr("text-anchor", "start")
 	.text(String);
 
 graph.selectAll("line")
@@ -36,7 +40,7 @@ graph.selectAll("line")
 	.attr("x1", x)
 	.attr("x2", x)
 	.attr("y1", 0)
-	.attr("y1", 120)
+	.attr("y2", 120)
 	.attr("stroke", "#ccc");
 
 graph.selectAll("text.rule")

@@ -1,14 +1,10 @@
-// data is first 10 hours of Miami TMY3 outdoor dry bulb
-// cut -f2 for_21.dat |head -n 10|tr '\n' ','; echo
-var to = [69.2, 66.3, 66.0, 66.0, 66.5, 66.5, 66.0, 66.3, 69.8]
-
-// copied from http://www.janwillemtulp.com/2011/04/01/tutorial-line-chart-in-d3/  
+﻿// adapted from http://www.janwillemtulp.com/2011/04/01/tutorial-line-chart-in-d3/
 // Constants for line graph
-var w = 400,
-h = 200,
-margin = 20,
-y = d3.scale.linear().domain([60, 70]).range([0 + margin, h - margin]),
-x = d3.scale.linear().domain([0, to.length]).range([0 + margin, w - margin])
+var w = 800,
+h = 500,
+margin = 25,
+y = d3.scale.linear().domain([100, 40]).range([0 + margin, h - margin]),
+x = d3.scale.linear().domain([0, 8760]).range([0 + margin, w - margin])
 
 // create svg and transform group for line graph
 var vis = d3.select("body")
@@ -17,13 +13,19 @@ var vis = d3.select("body")
     .attr("height", h)
 
 var g = vis.append("svg:g")
-//    .attr("transform", "translate(0, 200)");
+// skipping this method of moving the origin
+// .attr("transform", "translate(0, 200)");
 
+
+// data is Miami TMY3 outdoor dry bulb
+var to = d3.json("To.json", function(json) {
 // create and append the line itself
 var line = d3.svg.line()
     .x(function(d,i) { return x(i); })
-    .y(function(d) { return  y(d); })
-g.append("svg:path").attr("d", line(to));
+    .y(function(d) { return y(d); });
+
+g.append("svg:path")
+    .attr("d", line(json)); })
 
 // x axis line
 g.append("svg:line")
@@ -39,14 +41,14 @@ g.append("svg:line")
     .attr("x2", margin)
     .attr("y2", h-margin)
 
-// axis labels
+// axis labels, scaled to the months of the year
 g.selectAll(".xLabel")
-    .data(x.ticks(5))
+    .data([24*day for each (day in [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365])])
     .enter().append("svg:text")
     .attr("class", "xLabel")
-    .text(String)
+    .text(function(d, i) {return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"][i]; })
     .attr("x", x)
-    .attr("y", h)
+    .attr("y", h-5)
     .attr("text-anchor", "middle")
 
 g.selectAll(".yLabel")
