@@ -25,7 +25,8 @@ var line = d3.svg.line()
     .y(function(d) { return y(d); });
 
 g.append("svg:path")
-    .attr("d", line(json)); })
+    .attr("d", line(json))
+    .attr("style", "stroke: blueviolet"); })
 
 // x axis line
 g.append("svg:line")
