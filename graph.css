@@ -41,3 +41,7 @@ text {
     font-family: Arial;
     font-size: 9pt;
 }
+
+circle {
+	stroke: steelblue;
+}
