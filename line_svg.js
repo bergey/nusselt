@@ -16,9 +16,7 @@ var g = vis.append("svg:g")
 // skipping this method of moving the origin
 // .attr("transform", "translate(0, 200)");
 
-
-// data is Miami TMY3 outdoor dry bulb
-var to = d3.json("To.json", function(json) {
+function createLine(dataname) { return function (json) {
 // create and append the line itself
 var line = d3.svg.line()
     .x(function(d,i) { return x(i); })
@@ -26,14 +24,20 @@ var line = d3.svg.line()
 
 g.append("svg:path")
     .attr("d", line(json))
-    .attr("style", "stroke: blueviolet"); })
+	.attr("id", dataname)
+	.attr("style", "stroke: red"); }}
+
+// data is Miami TMY3 outdoor dry bulb
+var to = d3.json("To.json", createLine("Miami"))
+//and another random dataset
+var t2 = d3.json("test2.json", createLine("Random"))
 
 // x axis line
 g.append("svg:line")
     .attr("x1", margin)
     .attr("y1", h-margin)
     .attr("x2", w)
-    .attr("y2",  h-margin)
+    .attr("y2", h-margin)
 
 // y axis line
 g.append("svg:line")
@@ -60,3 +64,19 @@ g.selectAll(".yLabel")
     .attr("x", 0)
     .attr("y", y)
     .attr("dy", 4)
+
+function colorChange(selectObj, dataname) {
+	var idx = selectObj.selectedIndex;
+	var color = selectObj.options[idx].value;
+
+	d3.select("#" + dataname)
+		.attr("style", "stroke: " + color)}
+
+function showHide(tickyBox, dataname) {
+	var idx = tickyBox.checked
+	if (idx){
+		d3.select("#" + dataname)
+			.attr("display", "inline");}
+	else{
+		d3.select("#" + dataname)
+			.attr("display", "none");}}
