@@ -12,6 +12,16 @@ var vis = d3.select("body")
     .attr("width", w)
     .attr("height", h)
 
+var defs = vis.append("svg:defs");
+
+defs.append("svg:clipPath")
+	.attr("id", "databox")
+	.append("svg:rect")
+	.attr("x", margin)
+	.attr("y", margin)
+	.attr("width", w - 2*margin)
+	.attr("height", h - 2*margin);
+
 var g = vis.append("svg:g")
 // skipping this method of moving the origin
 // .attr("transform", "translate(0, 200)");
@@ -25,7 +35,8 @@ var line = d3.svg.line()
 g.append("svg:path")
     .attr("d", line(json))
 	.attr("id", dataname)
-	.attr("style", "stroke: red"); }}
+	.attr("style", "stroke: red")
+	.attr("clip-path", "url(#databox)"); }}
 
 // data is Miami TMY3 outdoor dry bulb
 var to = d3.json("json/z1h100s1rh50v1-To.json", createLine("Miami"))
