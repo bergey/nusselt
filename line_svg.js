@@ -28,9 +28,9 @@ g.append("svg:path")
 	.attr("style", "stroke: red"); }}
 
 // data is Miami TMY3 outdoor dry bulb
-var to = d3.json("To.json", createLine("Miami"))
+var to = d3.json("json/z1h100s1rh50v1-To.json", createLine("Miami"))
 //and another random dataset
-var t2 = d3.json("test2.json", createLine("Random"))
+var t2 = d3.json("json/z5h100s1rh50v1-To.json", createLine("Indianapolis"))
 
 // x axis line
 g.append("svg:line")
