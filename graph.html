@@ -4,7 +4,7 @@
   <title>Graph Test</title>
   <meta content='text/html' charset='UTF-8' http-equiv='Content-Type'/>
   <link type="text/css" rel="stylesheet" href="graph.css" />
-  <script type="text/javascript" src="d3-2.4.6.js" > </script>
+  <script type="text/javascript" src="d3.js" > </script>
 </head>
 <body>
 <p>This is  not a graph.</p>
@@ -27,7 +27,7 @@
 <option>black</option>
 </select></p>
 <script type="text/javascript" src="line_svg.js"> </script>
-<p>x-range: <input type="text" name="x-bottom" size=5 /> &lt; x &lt; <input type="text" name="x-top" size=5 /></p>
-<p>y-range: <input type="text" name="y-bottom" size=5 /> &lt; y &lt; <input type="text" name="y-top" size=5 /></p>
+<p>x-range: <input type="text" name="x-bottom" size=5 value=0 onchange="rescale;" /> &lt; x &lt; <input type="text" name="x-top" size=5 value=8760 onchange="rescale();" /></p>
+<p>y-range: <input type="text" name="y-bottom" size=5 value=40 onchange="rescale();" /> &lt; y &lt; <input type="text" name="y-top" size=5 value=100 onchange="rescale();" /></p>
 </body>
 </html>
