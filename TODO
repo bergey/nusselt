@@ -1,0 +1,15 @@
+* zoom
+** update text boxen on zoom
+** update graph domain on textbox change
+** drag to set domain
+** drag rectangle, x and y domains
+* pan
+** buttons to pan
+* x-axis (time) display
+** pretty-print depending on scale
+*** month
+*** date
+** more careful tick selection?
+* color selectors
+** display dataset name in selector
+** different starting colors for each dataset
