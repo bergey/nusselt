@@ -31,7 +31,7 @@ var g = vis.append("svg:g")
         .extent([[0, w], [0, h], [0, 10]])
         .on("zoom", redraw));
 
-function createLine(dataname) { return function (json) {
+function createLine(dataname, datacolor) { return function (json) {
 // create and append the line itself
 var line = d3.svg.line()
     .x(function(d,i) { return x(i); })
@@ -41,13 +41,13 @@ g.append("svg:path")
     .data([json])
     .attr("d", line)
 	.attr("id", dataname)
-	.attr("style", "stroke: red")
+	.attr("style", "stroke: " + datacolor)
 	.attr("clip-path", "url(#databox)"); }}
 
 // data is Miami TMY3 outdoor dry bulb
-var to = d3.json("json/z1h100s1rh50v1-To.json", createLine("Miami"))
+var to = d3.json("json/z1h100s1rh50v1-To.json", createLine("Miami", "blue"))
 //and another, from Indianapolis
-var t2 = d3.json("json/z5h100s1rh50v1-To.json", createLine("Indianapolis"))
+var t2 = d3.json("json/z5h100s1rh50v1-To.json", createLine("Indianapolis", "red"))
 
 // x axis line
 g.append("svg:line")
