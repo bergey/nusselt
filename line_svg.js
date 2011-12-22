@@ -4,7 +4,7 @@ var w = 800,
 h = 500,
 margin = 25,
 y = d3.scale.linear().domain([100, 40]).range([0 + margin, h - margin]),
-x = d3.scale.linear().domain([0, 8760]).range([0 + margin, w - margin]), 
+x = d3.scale.linear().domain([0, 8760]).range([0 + margin, w - margin]),
 tx = function(d) { return "translate(" + x(d) + ",0)"; },
 ty = function(d) { return "translate(0," + y(d) + ")"; }
 
@@ -40,9 +40,9 @@ var line = d3.svg.line()
 g.append("svg:path")
     .data([json])
     .attr("d", line)
-	.attr("id", dataname)
-	.attr("style", "stroke: " + datacolor)
-	.attr("clip-path", "url(#databox)"); }}
+    .attr("id", dataname)
+    .attr("style", "stroke: " + datacolor)
+    .attr("clip-path", "url(#databox)"); }}
 
 // data is Miami TMY3 outdoor dry bulb
 var to = d3.json("json/z1h100s1rh50v1-To.json", createLine("Miami", "blue"))
@@ -67,21 +67,21 @@ redraw();
 
 //changes the color of each datapath based on its dropdown selector
 function colorChange(selectObj, dataname) {
-	var idx = selectObj.selectedIndex;
-	var color = selectObj.options[idx].value;
+    var idx = selectObj.selectedIndex;
+    var color = selectObj.options[idx].value;
 
-	d3.select("#" + dataname)
-		.attr("style", "stroke: " + color)}
+    d3.select("#" + dataname)
+        .attr("style", "stroke: " + color)}
 
 //switches each datapath on or off based on its tickybox
 function showHide(tickyBox, dataname) {
-	var idx = tickyBox.checked
-	if (idx){
-		d3.select("#" + dataname)
-			.attr("display", "inline");}
-	else{
-		d3.select("#" + dataname)
-			.attr("display", "none");}}
+    var idx = tickyBox.checked
+    if (idx){
+        d3.select("#" + dataname)
+            .attr("display", "inline");}
+    else{
+        d3.select("#" + dataname)
+            .attr("display", "none");}}
 
 // Taken from mbostock's zoom-pan.html example
 // on double-click, redraws the x-axis, y-axis, and all datapaths to the new domain
