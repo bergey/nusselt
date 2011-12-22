@@ -65,13 +65,6 @@ g.append("svg:line")
 
 redraw();
 
-// axis labels, scaled to the months of the year
-//g.selectAll(".xLabel")
-//    .data([24*day for each (day in [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365])])
-//    .enter().append("svg:text")
-//    .attr("class", "xLabel")
-//    .text(function(d, i) {return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"][i]; })
-
 //changes the color of each datapath based on its dropdown selector
 function colorChange(selectObj, dataname) {
 	var idx = selectObj.selectedIndex;
@@ -91,6 +84,7 @@ function showHide(tickyBox, dataname) {
 			.attr("display", "none");}}
 
 // Taken from mbostock's zoom-pan.html example
+// on double-click, redraws the x-axis, y-axis, and all datapaths to the new domain
 function redraw() {
   if (d3.event) d3.event.transform(x, y);
 
@@ -111,7 +105,6 @@ function redraw() {
 
   gxe.append("text")
       .attr("y", h - 5)
-//      .attr("dy", "1em")
       .attr("text-anchor", "middle")
       .text(fx);
 
@@ -132,18 +125,13 @@ function redraw() {
   gye.append("text")
       .attr("x", 0)
       .attr("dy", 4)
-//      .attr("text-anchor", "end")
       .text(fy);
 
   gy.exit().remove();
 
+// Redraw all paths
 vis.selectAll("path")
     .attr("d", d3.svg.line()
         .x(function(d,i) { return x(i); })
         .y(function(d) { return y(d); }));
 }
-
-        
-//function rescale() {
-//	x = x.domain([d3.select("#x-bottom").value, d3.select("#x-top").value]);
-//	y = y.domain([d3.select("#y-top").value, d3.select("#y-bottom").value]);}
