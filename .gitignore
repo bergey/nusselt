@@ -1,1 +1,8 @@
 json
+\#*
+*~
+__pycache__
+# library copy
+d3*
+# symlink
+parametrics.py
